@@ -156,6 +156,7 @@ export default function Navbar() {
 
       <CartDrawer open={openCart} onClose={() => setOpenCart(false)} />
 
+
       {confirmLogout &&
         createPortal(
           <div className="modalOverlay">
