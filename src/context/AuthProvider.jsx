@@ -1,12 +1,11 @@
-import { createContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { AuthContext } from "./AuthContext";
 import mockUser from "../data/user";
-
-export const AuthContext = createContext();
 
 const TOKEN_KEY = "auth_token";
 const USER_KEY = "auth_user";
 
-export function AuthProvider({ children }) {
+export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 

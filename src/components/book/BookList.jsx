@@ -1,12 +1,8 @@
 import BookCard from "./BookCard";
 import "./BookList.css";
 
-export default function BookList({ books, page, setPage, totalPages, gridRef }) {
-  if (!books || books.length === 0) {
-    return <p className="empty">No hay resultados</p>;
-  }
-
-  const Pagination = () => (
+function Pagination({ page, setPage, totalPages }) {
+  return (
     <div className="pagination">
       <button
         className="btn"
@@ -29,10 +25,16 @@ export default function BookList({ books, page, setPage, totalPages, gridRef }) 
       </button>
     </div>
   );
+}
+
+export default function BookList({ books, page, setPage, totalPages, gridRef }) {
+  if (!books || books.length === 0) {
+    return <p className="empty">No hay resultados</p>;
+  }
 
   return (
     <div className="wrapper">
-      <Pagination />
+      <Pagination page={page} setPage={setPage} totalPages={totalPages} />
 
       <div className="grid" ref={gridRef}>
         {books.map((book) => (
@@ -42,7 +44,7 @@ export default function BookList({ books, page, setPage, totalPages, gridRef }) 
         ))}
       </div>
 
-      <Pagination />
+      <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </div>
   );
 }

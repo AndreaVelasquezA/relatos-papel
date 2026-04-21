@@ -38,6 +38,7 @@ export default function Navbar() {
   const closeMenu = () => setMenuOpen(false);
 
   const handleLogout = () => {
+    localStorage.setItem("books_current_page", 1);
     logout();
     setConfirmLogout(false);
     closeMenu();
