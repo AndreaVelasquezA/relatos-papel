@@ -1,0 +1,305 @@
+/* NAV */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+/* TEMAS */
+.light {
+  background: #ffffffcc;
+  color: #0f172a;
+}
+
+.dark {
+  background: #0f172acc;
+  color: #ffffff;
+}
+
+/* LOGO */
+.logo {
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* LINKS DESKTOP */
+.links {
+  display: flex;
+  gap: 18px;
+}
+
+.navItem {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.7;
+  transition: 0.2s;
+}
+
+.navItem:hover {
+  opacity: 1;
+}
+
+.navItem.active {
+  opacity: 1;
+  font-weight: bold;
+}
+
+/* RIGHT */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.desktop-only {
+  display: flex;
+  gap: 10px;
+}
+
+/* BOTONES */
+.iconBtn,
+.menuBtn,
+.navBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* HAMBURGUESA */
+.light .menuBtn {
+  color: #0f172a;
+}
+
+.dark .menuBtn {
+  color: #ffffff;
+}
+
+/* CARRITO */
+.cartBtn {
+  position: relative;
+  background: #3b82f6;
+  border: none;
+  color: #fff;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: red;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+/* HAMBURGUESA */
+.menuBtn {
+  display: none;
+}
+
+/* OVERLAY MENU */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9998;
+}
+
+/* MOBILE MENU */
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  z-index: 9999;
+}
+
+/* TEMAS MOBILE */
+.mobileLight {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.mobileDark {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+/* ITEMS */
+.mobileItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.mobileItem:hover {
+  background: var(--bg-secondary);
+}
+
+.mobileItem.logout {
+  color: #ef4444;
+}
+
+/* BOTÓN CERRAR */
+.closeBtn {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+  color: inherit;
+}
+
+/* 🔥 MODAL CERRAR SESIÓN */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999; /* 🔥 SIEMPRE ENCIMA */
+  backdrop-filter: blur(4px);
+}
+
+/* CAJA */
+.modal {
+  width: 90%;
+  max-width: 380px;
+  padding: 22px;
+  border-radius: 16px;
+  text-align: center;
+  animation: scaleIn 0.2s ease;
+}
+
+/* TEMAS */
+.modalLight {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.modalDark {
+  background: #1e293b;
+  color: #ffffff;
+}
+
+/* TEXTO */
+.modal h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.modal p {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 18px;
+}
+
+/* BOTONES */
+.modalActions {
+  display: flex;
+  gap: 10px;
+}
+
+.modalActions button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  border: none;
+  transition: 0.2s;
+}
+
+/* CANCELAR */
+.modalActions button:first-child {
+  background: var(--bg-secondary);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.modalActions button:first-child:hover {
+  opacity: 0.8;
+}
+
+/* CONFIRMAR */
+.confirmBtn {
+  background: #ef4444;
+  color: #fff;
+}
+
+.confirmBtn:hover {
+  background: #dc2626;
+}
+
+/* ANIMACIÓN */
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+  .links {
+    display: none;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
+  .menuBtn {
+    display: block;
+  }
+
+  .modal {
+    max-width: 320px;
+    padding: 18px;
+  }
+
+  .modalActions {
+    flex-direction: column;
+  }
+
+  .modalActions button {
+    width: 100%;
+  }
+}
