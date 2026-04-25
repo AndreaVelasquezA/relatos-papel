@@ -1,71 +1,152 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
+import { ThemeContext } from "../../context/ThemeContext";
 import { useNavigate } from "react-router-dom";
 
+import ConfirmModal from "../ui/ConfirmModal";
+
 export default function CartDrawer({ open, onClose }) {
-  const { cart, removeFromCart } = useContext(CartContext);
+  const {
+    cart,
+    removeFromCart,
+    removeAllFromCart,
+    clearCart,
+    addToCart,
+  } = useContext(CartContext);
+
+  const { theme } = useContext(ThemeContext);
+
+  const [confirmClear, setConfirmClear] = useState(false);
+
+  const isDark = theme === "dark";
+
   const navigate = useNavigate();
 
-  const total = cart.reduce((acc, item) => acc + item.price, 0);
+  const total = cart.reduce(
+    (acc, item) => acc + item.price * (item.quantity || 1),
+    0
+  );
 
   return (
     <>
-      {/* OVERLAY */}
       {open && <div style={styles.overlay} onClick={onClose} />}
 
-      {/* DRAWER */}
       <div
         style={{
           ...styles.drawer,
           ...(open ? styles.drawerOpen : {}),
         }}
       >
-        {/* HEADER */}
         <div style={styles.header}>
           <h2 style={{ margin: 0 }}>🛒 Carrito</h2>
+
           <button onClick={onClose} style={styles.close}>
             ✕
           </button>
         </div>
 
-        {/* BODY */}
         <div style={styles.body}>
           {cart.length === 0 && (
             <p style={styles.empty}>Tu carrito está vacío</p>
           )}
 
-          {cart.map((item) => (
-            <div key={item.id} style={styles.card}>
-              <img
-                src={item.image}
-                alt={item.title}
-                style={styles.image}
-              />
+          {cart.map((item) => {
+            const quantity = item.quantity || 1;
 
-              <div style={styles.info}>
-                <h4 style={styles.title}>{item.title}</h4>
-                <p style={styles.author}>{item.author}</p>
-                <p style={styles.price}>
-                  ${item.price.toLocaleString()}
-                </p>
+            const stock = item.stock || 0;
+
+            const reachedStock = quantity >= stock;
+
+            return (
+              <div key={item.id} style={styles.card}>
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  style={styles.image}
+                />
+
+                <div style={styles.info}>
+                  <h4 style={styles.title}>{item.title}</h4>
+
+                  <p style={styles.author}>{item.author}</p>
+
+                  <p style={styles.price}>
+                    ${item.price.toLocaleString()}
+                  </p>
+
+                  <p style={styles.stock}>
+                    Stock disponible: {stock}
+                  </p>
+
+                  <p style={styles.quantity}>
+                    Cantidad: {quantity}
+                  </p>
+
+                  <p style={styles.subtotal}>
+                    Subtotal: $
+                    {(
+                      item.price * quantity
+                    ).toLocaleString()}
+                  </p>
+
+                  <div style={styles.actions}>
+                    <button
+                      style={styles.qtyBtn}
+                      onClick={() =>
+                        removeFromCart(item.id)
+                      }
+                    >
+                      −
+                    </button>
+
+                    <button
+                      style={{
+                        ...styles.qtyBtn,
+                        ...(reachedStock
+                          ? styles.disabledBtn
+                          : {}),
+                      }}
+                      disabled={reachedStock}
+                      onClick={() => addToCart(item, 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  {reachedStock && (
+                    <p style={styles.limitText}>
+                      Límite de stock alcanzado
+                    </p>
+                  )}
+                </div>
+
+                <button
+                  style={styles.removeBtn}
+                  onClick={() =>
+                    removeAllFromCart(item.id)
+                  }
+                >
+                  ✕
+                </button>
               </div>
-
-              <button
-                onClick={() => removeFromCart(item.id)}
-                style={styles.remove}
-              >
-                ✕
-              </button>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* FOOTER */}
         <div style={styles.footer}>
           <div style={styles.total}>
             <span>Total:</span>
+
             <strong>${total.toLocaleString()}</strong>
           </div>
+
+          <button
+            style={styles.clear}
+            disabled={!cart.length}
+            onClick={() => setConfirmClear(true)}
+          >
+            Vaciar carrito
+          </button>
 
           <button
             style={styles.checkout}
@@ -79,6 +160,20 @@ export default function CartDrawer({ open, onClose }) {
           </button>
         </div>
       </div>
+
+      <ConfirmModal
+        open={confirmClear}
+        title="¿Vaciar carrito?"
+        message="Todos los libros serán eliminados del carrito."
+        confirmText="Vaciar"
+        cancelText="Cancelar"
+        onClose={() => setConfirmClear(false)}
+        onConfirm={() => {
+          clearCart();
+          setConfirmClear(false);
+        }}
+        isDark={isDark}
+      />
     </>
   );
 }
@@ -150,7 +245,7 @@ const styles = {
     background: "var(--bg)",
     padding: "12px",
     borderRadius: "12px",
-    alignItems: "center",
+    alignItems: "flex-start",
     border: "1px solid var(--border)",
   },
 
@@ -181,14 +276,64 @@ const styles = {
     fontWeight: "bold",
     fontSize: "14px",
     color: "var(--primary)",
+    marginBottom: "4px",
   },
 
-  remove: {
+  stock: {
+    fontSize: "12px",
+    color: "#22c55e",
+    marginBottom: "4px",
+  },
+
+  quantity: {
+    fontSize: "13px",
+    color: "var(--text-secondary)",
+    marginBottom: "4px",
+  },
+
+  subtotal: {
+    fontSize: "13px",
+    fontWeight: "600",
+    marginBottom: "10px",
+  },
+
+  actions: {
+    display: "flex",
+    gap: "8px",
+  },
+
+  qtyBtn: {
+    width: "30px",
+    height: "30px",
+    borderRadius: "8px",
+    border: "1px solid var(--border)",
+    background: "var(--bg-secondary)",
+    color: "var(--text)",
+    cursor: "pointer",
+    fontSize: "16px",
+    fontWeight: "bold",
+  },
+
+  disabledBtn: {
+    opacity: 0.5,
+    cursor: "not-allowed",
+  },
+
+  limitText: {
+    marginTop: "8px",
+    fontSize: "12px",
+    color: "#ef4444",
+    fontWeight: "600",
+  },
+
+  removeBtn: {
     background: "transparent",
     border: "none",
     color: "#f87171",
     cursor: "pointer",
     fontSize: "18px",
+    fontWeight: "bold",
+    alignSelf: "flex-start",
   },
 
   footer: {
@@ -203,6 +348,18 @@ const styles = {
     marginBottom: "15px",
     fontSize: "18px",
     color: "var(--text)",
+  },
+
+  clear: {
+    width: "100%",
+    padding: "12px",
+    background: "transparent",
+    border: "1px solid #f87171",
+    borderRadius: "10px",
+    color: "#f87171",
+    fontWeight: "600",
+    cursor: "pointer",
+    marginBottom: "12px",
   },
 
   checkout: {

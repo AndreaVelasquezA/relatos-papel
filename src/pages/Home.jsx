@@ -54,22 +54,22 @@ export default function Home() {
   }, []);
 
   /* debounce búsqueda */
-  useEffect(() => {
-    // evitar ejecutar en el primer render
-    if (isFirstLoad.current) {
-      isFirstLoad.current = false;
-      return;
-    }
+  // useEffect(() => {
+  //   // evitar ejecutar en el primer render
+  //   if (isFirstLoad.current) {
+  //     isFirstLoad.current = false;
+  //     return;
+  //   }
 
-    const timeout = setTimeout(() => {
-      setDebounced(search);
-      setPage(1);
+  //   const timeout = setTimeout(() => {
+  //     setDebounced(search);
+  //     setPage(1);
 
-      localStorage.removeItem(STORAGE_KEY);
-    }, 300);
+  //     localStorage.removeItem(STORAGE_KEY);
+  //   }, 300);
 
-    return () => clearTimeout(timeout);
-  }, [search]);
+  //   return () => clearTimeout(timeout);
+  // }, [search]);
 
   const books = useBooks(debounced);
 

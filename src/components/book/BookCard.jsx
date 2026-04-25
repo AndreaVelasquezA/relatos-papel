@@ -9,7 +9,6 @@ function BookCard({ book }) {
       style={styles.card}
       onClick={() => navigate(`/book/${book.id}`)}
     >
-      {/* IMAGEN */}
       <div style={styles.imageWrapper}>
         <img
           src={book.image}
@@ -19,7 +18,6 @@ function BookCard({ book }) {
         />
       </div>
 
-      {/* INFO */}
       <div style={styles.info}>
         <h3 style={styles.title}>{book.title}</h3>
 
