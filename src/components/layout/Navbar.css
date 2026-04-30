@@ -264,6 +264,13 @@
   background: #dc2626;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
 /* ANIMACIÓN */
 @keyframes scaleIn {
   from {

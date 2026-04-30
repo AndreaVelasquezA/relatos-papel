@@ -12,12 +12,10 @@ export default function CartProvider({ children }) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  // AGREGAR LIBRO
   const addToCart = (book, quantity = 1) => {
     setCart((prev) => {
       const exists = prev.find((b) => b.id === book.id);
 
-      // si ya existe → aumentar cantidad
       if (exists) {
         return prev.map((b) =>
           b.id === book.id
@@ -29,7 +27,6 @@ export default function CartProvider({ children }) {
         );
       }
 
-      // si no existe → agregar nuevo
       return [
         ...prev,
         {
@@ -42,7 +39,6 @@ export default function CartProvider({ children }) {
     return true;
   };
 
-  // ELIMINAR 1 UNIDAD
   const removeFromCart = (id) => {
     setCart((prev) =>
       prev
@@ -58,23 +54,19 @@ export default function CartProvider({ children }) {
     );
   };
 
-  // ELIMINAR COMPLETAMENTE
   const removeAllFromCart = (id) => {
     setCart((prev) => prev.filter((b) => b.id !== id));
   };
 
-  // VACIAR CARRITO
   const clearCart = () => {
     setCart([]);
   };
 
-  // TOTAL ITEMS
   const totalItems = cart.reduce(
     (acc, item) => acc + (item.quantity || 1),
     0
   );
 
-  // TOTAL PRECIO
   const totalPrice = cart.reduce(
     (acc, item) =>
       acc + item.price * (item.quantity || 1),

@@ -16,6 +16,7 @@ import {
     User,
     BookOpen,
     Home,
+    Library
 } from 'lucide-react';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -49,7 +50,8 @@ export default function Navbar() {
         <>
             <nav className={`nav ${isDark ? 'dark' : 'light'}`}>
                 <Link to="/" className="logo">
-                    📚 Relatos
+                    <Library size={22} />
+                    <span>Relatos</span>
                 </Link>
 
                 <div className="links">
