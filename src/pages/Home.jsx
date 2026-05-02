@@ -20,7 +20,6 @@ export default function Home() {
 
     const isFirstLoad = useRef(true);
 
-    /* recuperar página guardada */
 
     useEffect(() => {
         const savedPage = parseInt(localStorage.getItem(STORAGE_KEY), 10);
@@ -30,13 +29,11 @@ export default function Home() {
         }
     }, []);
 
-    /* guardar página actual */
 
     useEffect(() => {
         localStorage.setItem(STORAGE_KEY, page);
     }, [page]);
 
-    /* calcular tamaño dinámico */
 
     const calculatePageSize = () => {
         if (!gridRef.current) return;
@@ -68,7 +65,6 @@ export default function Home() {
         };
     }, []);
 
-    /* debounce búsqueda */
 
     useEffect(() => {
         if (isFirstLoad.current) {
@@ -89,7 +85,6 @@ export default function Home() {
 
     const books = useBooks(debounced);
 
-    /* paginación */
 
     const paginatedBooks = useMemo(() => {
         const start = (page - 1) * pageSize;
@@ -99,7 +94,6 @@ export default function Home() {
 
     const totalPages = Math.ceil(books.length / pageSize);
 
-    /* evitar páginas inválidas */
 
     useEffect(() => {
         if (page > totalPages && totalPages > 0) {
