@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
-import Toast from "../components/ui/Toast";
 import "./Checkout.css";
 
 export default function Checkout() {
-  const { cart, clearCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
-  const [showToast, setShowToast] = useState(false);
+  const { cart, clearCart } = useContext(CartContext);
 
   const [form, setForm] = useState({
     name: "",
@@ -29,8 +29,9 @@ export default function Checkout() {
       return;
     }
 
-    setShowToast(true);
+    window.alert("Compra realizada con éxito");
     clearCart();
+    navigate("/home");
   };
 
   return (
@@ -89,9 +90,7 @@ export default function Checkout() {
                   <p className="itemAuthor">{item.author}</p>
                 </div>
 
-                <p className="price">
-                  ${item.price.toLocaleString()}
-                </p>
+                <p className="price">${item.price.toLocaleString()}</p>
               </div>
             ))}
           </div>
@@ -104,18 +103,11 @@ export default function Checkout() {
           <button
             className={`payBtn ${!cart.length ? "disabled" : ""}`}
             disabled={!cart.length}
-            onClick={handleCheckout}
-          >
+            onClick={handleCheckout}>
             Pagar ahora
           </button>
         </div>
       </div>
-
-      <Toast
-        message="Compra realizada con éxito"
-        show={showToast}
-        onClose={() => setShowToast(false)}
-      />
     </>
   );
 }

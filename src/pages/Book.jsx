@@ -3,6 +3,7 @@ import books from "../data/books";
 import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
 import Toast from "../components/ui/Toast";
+import { ShoppingCart, ArrowLeft } from "lucide-react";
 
 export default function Book() {
   const { id } = useParams();
@@ -44,9 +45,20 @@ export default function Book() {
           ...styles.wrapper,
           flexDirection: isDesktop ? "row" : "column",
           alignItems: isDesktop ? "flex-start" : "center",
-        }}
-      >
-        <div style={styles.imageContainer}>
+        }}>
+        <div
+          style={{
+            ...styles.imageContainer,
+            alignItems: isDesktop ? "flex-start" : "center",
+          }}>
+          <button
+            type="button"
+            aria-label="Volver al catálogo"
+            title="Volver"
+            style={styles.backBtn}
+            onClick={() => navigate("/home")}>
+            <ArrowLeft size={16} />
+          </button>
           <img src={book.image} alt={book.title} style={styles.image} />
         </div>
 
@@ -67,17 +79,10 @@ export default function Book() {
             style={{
               ...styles.buttons,
               flexDirection: isDesktop ? "row" : "column",
-            }}
-          >
+            }}>
             <button style={styles.primaryBtn} onClick={handleAdd}>
-              🛒 Añadir al carrito
-            </button>
-
-            <button
-              style={styles.secondaryBtn}
-              onClick={() => navigate("/home")}
-            >
-              ← Volver
+              <ShoppingCart size={18} />
+              Añadir al carrito
             </button>
           </div>
         </div>
@@ -105,8 +110,12 @@ const styles = {
   imageContainer: {
     flex: "1",
     display: "flex",
-    justifyContent: "center",
+    flexDirection: "column",
+    gap: "12px",
     alignItems: "flex-start",
+    justifyContent: "flex-start",
+    width: "100%",
+    maxWidth: "380px",
   },
 
   image: {
@@ -159,6 +168,10 @@ const styles = {
   primaryBtn: {
     flex: 1,
     background: "var(--primary)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "10px",
     color: "#fff",
     border: "none",
     padding: "12px",
@@ -173,6 +186,20 @@ const styles = {
     color: "var(--text)",
     border: "1px solid var(--border)",
     padding: "12px",
+    borderRadius: "10px",
+    cursor: "pointer",
+  },
+
+  backBtn: {
+    flex: "0 0 auto",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "var(--bg-secondary)",
+    color: "var(--text)",
+    border: "1px solid var(--border)",
+    padding: "10px",
+    minWidth: "42px",
     borderRadius: "10px",
     cursor: "pointer",
   },

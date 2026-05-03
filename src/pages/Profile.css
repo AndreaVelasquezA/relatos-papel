@@ -1,33 +1,39 @@
 .profileContainer {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 20px;
-  padding: 30px;
-  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  max-width: 860px;
   margin: 0 auto;
 }
 
 /* PERFIL */
 .profileCard {
+  display: flex;
+  align-items: center;
+  gap: 20px;
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 20px;
-  text-align: center;
+}
+
+.profileInfo {
+  flex: 1;
 }
 
 .avatar {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 10px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   background: var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
   color: #fff;
+  flex-shrink: 0;
   overflow: hidden;
 }
 
@@ -38,69 +44,83 @@
 }
 
 .email {
-  font-size: 14px;
+  font-size: 13px;
   opacity: 0.7;
+  margin: 2px 0 0;
+}
+
+.infoDivider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin: 12px 0;
 }
 
 .info {
-  margin: 15px 0;
-  font-size: 14px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 13px;
   opacity: 0.8;
 }
 
-.primaryBtn {
-  padding: 10px;
-  width: 100%;
-  border: none;
-  border-radius: 10px;
-  background: var(--primary);
-  color: #fff;
-  cursor: pointer;
-}
-
-/* STATS */
-.statsCard {
-  grid-column: span 2;
-  display: flex;
-  gap: 20px;
-}
-
-.stat {
-  flex: 1;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 20px;
-  text-align: center;
-}
-
-.stat h3 {
+.info p {
   margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 /* PEDIDOS */
 .orders {
-  grid-column: span 2;
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 20px;
+}
+
+.ordersHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.ordersHeader h2 {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.ordersHeader span {
+  font-size: 13px;
+  opacity: 0.6;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .orderCard {
   display: flex;
   justify-content: space-between;
-  padding: 15px 0;
+  align-items: center;
+  padding: 11px 0;
   border-bottom: 1px solid var(--border);
+}
+
+.orderCard:last-child {
+  border-bottom: none;
 }
 
 .orderId {
   font-weight: bold;
+  margin: 0 0 2px;
 }
 
 .orderDate {
   font-size: 12px;
   opacity: 0.7;
+  margin: 0;
 }
 
 .orderRight {
@@ -109,13 +129,15 @@
 
 .orderTotal {
   font-weight: bold;
+  margin: 0 0 4px;
 }
 
 /* STATUS DINÁMICO */
 .status {
-  padding: 4px 10px;
-  border-radius: 8px;
-  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
   color: #fff;
 }
 
@@ -137,11 +159,12 @@
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .profileContainer {
-    grid-template-columns: 1fr;
+  .profileCard {
+    flex-direction: column;
+    text-align: center;
   }
 
-  .statsCard {
-    flex-direction: column;
+  .info {
+    justify-content: center;
   }
 }

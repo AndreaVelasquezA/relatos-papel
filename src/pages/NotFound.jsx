@@ -9,25 +9,27 @@ export default function NotFound() {
   const isDark = theme === "dark";
 
   return (
-    <div style={{ ...styles.wrapper, ...(isDark ? styles.darkBg : styles.lightBg) }}>
-      <div style={{ ...styles.card, ...(isDark ? styles.darkCard : styles.lightCard) }}>
+    <div
+      style={{
+        ...styles.wrapper,
+        ...(isDark ? styles.darkBg : styles.lightBg),
+      }}>
+      <div
+        style={{
+          ...styles.card,
+          ...(isDark ? styles.darkCard : styles.lightCard),
+        }}>
         <h1 style={styles.title}>404</h1>
 
-        <p style={styles.text}>
-          La página que buscas no existe
-        </p>
+        <p style={styles.text}>La página que buscas no existe</p>
 
-        <button
-          onClick={() => navigate("/")}
-          style={styles.button}
-        >
+        <button onClick={() => navigate("/")} style={styles.button}>
           Volver al inicio
         </button>
       </div>
     </div>
   );
 }
-
 
 const styles = {
   wrapper: {

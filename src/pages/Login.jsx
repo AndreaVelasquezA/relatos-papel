@@ -36,8 +36,16 @@ export default function Login() {
   };
 
   return (
-    <div style={{ ...styles.wrapper, ...(isDark ? styles.darkBg : styles.lightBg) }}>
-      <div style={{ ...styles.card, ...(isDark ? styles.darkCard : styles.lightCard) }}>
+    <div
+      style={{
+        ...styles.wrapper,
+        ...(isDark ? styles.darkBg : styles.lightBg),
+      }}>
+      <div
+        style={{
+          ...styles.card,
+          ...(isDark ? styles.darkCard : styles.lightCard),
+        }}>
         <h2 style={styles.title}>Bienvenido</h2>
 
         <p style={styles.subtitle}>Inicia sesión para continuar</p>
@@ -51,7 +59,10 @@ export default function Login() {
             placeholder="ejemplo@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ ...styles.input, ...(isDark ? styles.inputDark : styles.inputLight) }}
+            style={{
+              ...styles.input,
+              ...(isDark ? styles.inputDark : styles.inputLight),
+            }}
           />
         </div>
 
@@ -62,7 +73,10 @@ export default function Login() {
             placeholder="••••••••"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ ...styles.input, ...(isDark ? styles.inputDark : styles.inputLight) }}
+            style={{
+              ...styles.input,
+              ...(isDark ? styles.inputDark : styles.inputLight),
+            }}
           />
         </div>
 
@@ -72,14 +86,11 @@ export default function Login() {
           style={{
             ...styles.button,
             opacity: loading ? 0.7 : 1,
-          }}
-        >
+          }}>
           {loading ? "Entrando..." : "Entrar"}
         </button>
 
-        <p style={styles.footer}>
-          Demo: usa cualquier email y contraseña "1234"
-        </p>
+        <p style={styles.footer}>Email: usuario@test.com, Contraseña: 123456</p>
       </div>
     </div>
   );

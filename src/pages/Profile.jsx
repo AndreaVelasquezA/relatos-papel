@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { ArrowRight, Phone, MapPin, Calendar } from "lucide-react";
 import "./Profile.css";
 
 export default function Profile() {
@@ -11,7 +12,7 @@ export default function Profile() {
 
   return (
     <div className="profileContainer">
-      {/* 🔥 PERFIL */}
+      {/* PERFIL */}
       <div className="profileCard">
         <div className="avatar">
           {user.avatar ? (
@@ -21,35 +22,26 @@ export default function Profile() {
           )}
         </div>
 
-        <h2>{user.name}</h2>
-        <p className="email">{user.email}</p>
-
-        <div className="info">
-          <p>📞 {user.phone}</p>
-          <p>📍 {user.address}</p>
-          <p>📅 Desde: {user.joinedAt}</p>
-        </div>
-
-        <button className="primaryBtn">Editar perfil</button>
-      </div>
-
-      {/* 🔥 STATS */}
-      <div className="statsCard">
-        <div className="stat">
-          <h3>{user.stats?.totalOrders || 0}</h3>
-          <p>Pedidos</p>
-        </div>
-
-        <div className="stat">
-          <h3>${(user.stats?.totalSpent || 0).toLocaleString()}</h3>
-          <p>Gastado</p>
+        <div className="profileInfo">
+          <h2>{user.name}</h2>
+          <p className="email">{user.email}</p>
+          <div className="infoDivider" />
+          <div className="info">
+            <p><Phone size={18} aria-hidden /> {user.phone}</p>
+            <p><MapPin size={18} aria-hidden /> {user.address}</p>
+            <p><Calendar size={18} aria-hidden /> Desde: {user.joinedAt}</p>
+          </div>
         </div>
       </div>
 
-      {/* 🔥 PEDIDOS */}
+      {/* PEDIDOS */}
       <div className="orders">
-        <h2>Mis pedidos</h2>
-
+        <div className="ordersHeader">
+          <h2>Últimos pedidos</h2>
+          <span>
+            Ver todos <ArrowRight size={18} aria-hidden />
+          </span>
+        </div>
         {user.orders?.map((order) => (
           <div key={order.id} className="orderCard">
             <div>
@@ -58,13 +50,9 @@ export default function Profile() {
             </div>
 
             <div className="orderRight">
-              <p className="orderTotal">
-                ${order.total.toLocaleString()}
-              </p>
+              <p className="orderTotal">${order.total.toLocaleString()}</p>
 
-              <span className={`status ${order.status}`}>
-                {order.status}
-              </span>
+              <span className={`status ${order.status}`}>{order.status}</span>
             </div>
           </div>
         ))}

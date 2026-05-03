@@ -12,7 +12,7 @@ export default function Home() {
   const [pageSize, setPageSize] = useState(8);
 
   const gridRef = useRef(null);
-  const isFirstLoad = useRef(true); // 🔥 clave
+  const isFirstLoad = useRef(true);
 
   useEffect(() => {
     const savedPage = parseInt(localStorage.getItem(STORAGE_KEY), 10);
@@ -30,8 +30,9 @@ export default function Home() {
     if (!gridRef.current) return;
 
     const grid = gridRef.current;
-    const columns =
-      window.getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+    const columns = window
+      .getComputedStyle(grid)
+      .gridTemplateColumns.split(" ").length;
 
     const isMobile = window.innerWidth < 600;
 
@@ -53,7 +54,6 @@ export default function Home() {
     };
   }, []);
 
-  /* debounce búsqueda */
   useEffect(() => {
     // evitar ejecutar en el primer render
     if (isFirstLoad.current) {
@@ -80,7 +80,7 @@ export default function Home() {
 
   const totalPages = Math.ceil(books.length / pageSize);
 
-  /* evitar páginas inválidas */
+  /* pagina invalidas */
   useEffect(() => {
     if (page > totalPages && totalPages > 0) {
       setPage(1);
@@ -90,7 +90,7 @@ export default function Home() {
   return (
     <div style={styles.page}>
       <div style={styles.header}>
-        <h1 style={styles.title}>📚 Catálogo de libros</h1>
+        <h1 style={styles.title}>Catálogo de libros</h1>
         <p style={styles.subtitle}>
           Explora, busca y descubre nuevas historias
         </p>

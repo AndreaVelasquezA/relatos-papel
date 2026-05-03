@@ -54,8 +54,7 @@ export default function AuthProvider({ children }) {
         logout,
         isAuthenticated,
         loading,
-      }}
-    >
+      }}>
       {children}
     </AuthContext.Provider>
   );

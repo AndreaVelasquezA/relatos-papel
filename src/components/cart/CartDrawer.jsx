@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import { ShoppingCart, X } from "lucide-react";
 
 export default function CartDrawer({ open, onClose }) {
   const { cart, removeFromCart } = useContext(CartContext);
@@ -18,13 +19,21 @@ export default function CartDrawer({ open, onClose }) {
         style={{
           ...styles.drawer,
           ...(open ? styles.drawerOpen : {}),
-        }}
-      >
+        }}>
         {/* HEADER */}
         <div style={styles.header}>
-          <h2 style={{ margin: 0 }}>🛒 Carrito</h2>
+          <h2
+            style={{
+              margin: 0,
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+            }}>
+            <ShoppingCart size={22} aria-hidden />
+            <span>Carrito</span>
+          </h2>
           <button onClick={onClose} style={styles.close}>
-            ✕
+            <X size={22} aria-hidden />
           </button>
         </div>
 
@@ -36,25 +45,18 @@ export default function CartDrawer({ open, onClose }) {
 
           {cart.map((item) => (
             <div key={item.id} style={styles.card}>
-              <img
-                src={item.image}
-                alt={item.title}
-                style={styles.image}
-              />
+              <img src={item.image} alt={item.title} style={styles.image} />
 
               <div style={styles.info}>
                 <h4 style={styles.title}>{item.title}</h4>
                 <p style={styles.author}>{item.author}</p>
-                <p style={styles.price}>
-                  ${item.price.toLocaleString()}
-                </p>
+                <p style={styles.price}>${item.price.toLocaleString()}</p>
               </div>
 
               <button
                 onClick={() => removeFromCart(item.id)}
-                style={styles.remove}
-              >
-                ✕
+                style={styles.remove}>
+                <X size={22} aria-hidden />
               </button>
             </div>
           ))}
@@ -73,8 +75,7 @@ export default function CartDrawer({ open, onClose }) {
             onClick={() => {
               onClose();
               navigate("/checkout");
-            }}
-          >
+            }}>
             Finalizar compra
           </button>
         </div>
