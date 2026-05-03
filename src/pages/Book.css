@@ -1,0 +1,132 @@
+.book-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  padding: 40px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .book-page {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.book-cover {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 380px;
+}
+
+@media (min-width: 768px) {
+  .book-cover {
+    align-items: flex-start;
+  }
+}
+
+.book-image {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.book-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.book-title {
+  font-size: 32px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.book-author {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.book-rating {
+  font-size: 15px;
+}
+
+.book-price {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.book-description {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.book-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+  .book-actions {
+    flex-direction: row;
+  }
+}
+
+.book-add-btn {
+  flex: 1;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.book-secondary-btn {
+  flex: 1;
+  background: var(--bg-secondary);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.book-back-btn {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 10px;
+  min-width: 42px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.book-not-found {
+  padding: 40px;
+  text-align: center;
+}
