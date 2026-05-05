@@ -1,0 +1,48 @@
+.home-page {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 24px;
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.home-title {
+  font-size: clamp(26px, 4vw, 38px);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.home-subtitle {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.home-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+}
+
+.home-search-icon {
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.home-search-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+}

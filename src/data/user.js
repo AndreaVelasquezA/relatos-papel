@@ -1,20 +1,15 @@
 const mockUser = {
   id: 1,
-  name: "Juan Pérez",
-  email: "juan@email.com",
+  name: "Usuario Test",
+  email: "usuario@test.com",
   role: "USER",
 
-  avatar: null, // o URL futura
+  avatar: null,
 
   phone: "+57 300 123 4567",
   address: "Dosquebradas, Risaralda",
 
   joinedAt: "2025-11-20",
-
-  stats: {
-    totalOrders: 5,
-    totalSpent: 275000,
-  },
 
   orders: [
     {

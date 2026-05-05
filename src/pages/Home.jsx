@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import useBooks from "../hooks/useBooks";
 import BookList from "../components/book/BookList";
 import { Search } from "lucide-react";
+import "./Home.css";
 
 const STORAGE_KEY = "books_current_page";
 
@@ -12,7 +13,7 @@ export default function Home() {
   const [pageSize, setPageSize] = useState(8);
 
   const gridRef = useRef(null);
-  const isFirstLoad = useRef(true); // 🔥 clave
+  const isFirstLoad = useRef(true);
 
   useEffect(() => {
     const savedPage = parseInt(localStorage.getItem(STORAGE_KEY), 10);
@@ -30,8 +31,9 @@ export default function Home() {
     if (!gridRef.current) return;
 
     const grid = gridRef.current;
-    const columns =
-      window.getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+    const columns = window
+      .getComputedStyle(grid)
+      .gridTemplateColumns.split(" ").length;
 
     const isMobile = window.innerWidth < 600;
 
@@ -53,7 +55,6 @@ export default function Home() {
     };
   }, []);
 
-  /* debounce búsqueda */
   useEffect(() => {
     // evitar ejecutar en el primer render
     if (isFirstLoad.current) {
@@ -80,7 +81,7 @@ export default function Home() {
 
   const totalPages = Math.ceil(books.length / pageSize);
 
-  /* evitar páginas inválidas */
+  /* pagina invalidas */
   useEffect(() => {
     if (page > totalPages && totalPages > 0) {
       setPage(1);
@@ -88,19 +89,19 @@ export default function Home() {
   }, [totalPages, page]);
 
   return (
-    <div style={styles.page}>
-      <div style={styles.header}>
-        <h1 style={styles.title}>📚 Catálogo de libros</h1>
-        <p style={styles.subtitle}>
+    <div className="home-page">
+      <div className="home-header">
+        <h1 className="home-title">Catálogo de libros</h1>
+        <p className="home-subtitle">
           Explora, busca y descubre nuevas historias
         </p>
       </div>
 
-      <div style={styles.searchWrapper}>
-        <Search size={18} style={styles.icon} />
+      <div className="home-search">
+        <Search size={18} className="home-search-icon" aria-hidden />
 
         <input
-          style={styles.input}
+          className="home-search-input"
           type="text"
           placeholder="Buscar por título, autor o género..."
           value={search}
@@ -118,53 +119,3 @@ export default function Home() {
     </div>
   );
 }
-
-const styles = {
-  page: {
-    width: "100%",
-    maxWidth: "1400px",
-    margin: "0 auto",
-    padding: "30px 24px",
-  },
-
-  header: {
-    textAlign: "center",
-    marginBottom: "25px",
-  },
-
-  title: {
-    fontSize: "clamp(26px, 4vw, 38px)",
-    marginBottom: "6px",
-    fontWeight: "700",
-  },
-
-  subtitle: {
-    fontSize: "14px",
-    opacity: 0.7,
-  },
-
-  searchWrapper: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    background: "var(--bg-secondary)",
-    border: "1px solid var(--border)",
-    padding: "10px 14px",
-    borderRadius: "12px",
-    maxWidth: "600px",
-    margin: "0 auto 30px auto",
-  },
-
-  icon: {
-    opacity: 0.6,
-  },
-
-  input: {
-    width: "100%",
-    border: "none",
-    outline: "none",
-    background: "transparent",
-    color: "var(--text)",
-    fontSize: "14px",
-  },
-};

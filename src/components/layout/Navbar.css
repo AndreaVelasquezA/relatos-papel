@@ -24,6 +24,9 @@
 
 /* LOGO */
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-weight: bold;
   text-decoration: none;
   color: inherit;
@@ -181,7 +184,7 @@
   color: inherit;
 }
 
-/* 🔥 MODAL CERRAR SESIÓN */
+/* MODAL CERRAR SESIÓN */
 
 .modalOverlay {
   position: fixed;
@@ -190,7 +193,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 99999; /* 🔥 SIEMPRE ENCIMA */
+  z-index: 99999;
   backdrop-filter: blur(4px);
 }
 

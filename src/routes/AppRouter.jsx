@@ -10,7 +10,7 @@ import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
 
 import PrivateRoute from "./PrivateRoute";
-import PublicRoute from "./PublicRoute"; // 🔥 NUEVO
+import PublicRoute from "./PublicRoute";
 
 export default function AppRouter() {
   return (
@@ -18,7 +18,7 @@ export default function AppRouter() {
       <Routes>
         <Route path="/" element={<Landing />} />
 
-        {/* 🔥 RUTAS PÚBLICAS CONTROLADAS */}
+        {/* PUBLICAS */}
         <Route element={<PublicRoute />}>
           <Route path="/login" element={<Login />} />
         </Route>
@@ -26,7 +26,7 @@ export default function AppRouter() {
         <Route path="/home" element={<Home />} />
         <Route path="/book/:id" element={<Book />} />
 
-        {/* 🔒 PRIVADAS */}
+        {/*PRIVADAS */}
         <Route element={<PrivateRoute />}>
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/profile" element={<Profile />} />

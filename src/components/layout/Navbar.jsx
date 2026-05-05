@@ -48,7 +48,8 @@ export default function Navbar() {
     <>
       <nav className={`nav ${isDark ? "dark" : "light"}`}>
         <Link to="/" className="logo">
-          📚 Relatos
+          <BookOpen size={22} aria-hidden />
+          <span>Relatos de Papel</span>
         </Link>
 
         <div className="links">
@@ -56,12 +57,18 @@ export default function Navbar() {
             Inicio
           </NavItem>
 
-          <NavItem to="/home" icon={<BookOpen size={18} />} active={isActive("/home")}>
+          <NavItem
+            to="/home"
+            icon={<BookOpen size={18} />}
+            active={isActive("/home")}>
             Libros
           </NavItem>
 
           {user && (
-            <NavItem to="/profile" icon={<User size={18} />} active={isActive("/profile")}>
+            <NavItem
+              to="/profile"
+              icon={<User size={18} />}
+              active={isActive("/profile")}>
               Perfil
             </NavItem>
           )}
@@ -110,8 +117,7 @@ export default function Navbar() {
               className={`mobileMenu ${isDark ? "mobileDark" : "mobileLight"}`}
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-            >
+              exit={{ x: "100%" }}>
               <button className="closeBtn" onClick={closeMenu}>
                 <X />
               </button>
@@ -144,8 +150,7 @@ export default function Navbar() {
                   onClick={() => {
                     setConfirmLogout(true);
                     closeMenu();
-                  }}
-                >
+                  }}>
                   <LogOut size={18} /> Cerrar sesión
                 </button>
               )}
@@ -155,7 +160,6 @@ export default function Navbar() {
       </AnimatePresence>
 
       <CartDrawer open={openCart} onClose={() => setOpenCart(false)} />
-
 
       {confirmLogout &&
         createPortal(
@@ -175,7 +179,7 @@ export default function Navbar() {
               </div>
             </div>
           </div>,
-          document.body
+          document.body,
         )}
     </>
   );

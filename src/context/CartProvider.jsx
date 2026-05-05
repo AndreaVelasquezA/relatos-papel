@@ -12,15 +12,23 @@ export default function CartProvider({ children }) {
   }, [cart]);
 
   const addToCart = (book) => {
-    setCart((prev) => [...prev, book]);
+    setCart((prev) => {
+      if (prev.some((b) => b.id === book.id)) return prev;
+      return [...prev, book];
+    });
   };
 
   const removeFromCart = (id) => {
     setCart((prev) => prev.filter((b) => b.id !== id));
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, clearCart }}>
       {children}
     </CartContext.Provider>
   );
