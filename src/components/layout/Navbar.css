@@ -24,9 +24,6 @@
 
 /* LOGO */
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 6px;
   font-weight: bold;
   text-decoration: none;
   color: inherit;
@@ -184,7 +181,7 @@
   color: inherit;
 }
 
-/* MODAL CERRAR SESIÓN */
+/* 🔥 MODAL CERRAR SESIÓN */
 
 .modalOverlay {
   position: fixed;
@@ -193,7 +190,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 99999;
+  z-index: 99999; /* 🔥 SIEMPRE ENCIMA */
   backdrop-filter: blur(4px);
 }
 
@@ -265,6 +262,13 @@
 
 .confirmBtn:hover {
   background: #dc2626;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
 }
 
 /* ANIMACIÓN */
